@@ -1,0 +1,407 @@
+<!--To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+
+http://labs.abeautifulsite.net/archived/jquery-contextMenu/demo/
+-->
+<html>
+    <head>
+        <title>GNSMOOD SIMULATOR</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="kinetic-v4.7.2.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.0.1/jquery.contextMenu.min.js"></script>
+       
+        
+        </head>
+		<style>
+            body{padding:20px;}
+            #toolbar{
+				width:800px;
+				height:72px;
+                border:solid 1px blue;
+            }
+			#toolbar2{
+				width:800px;
+                height:72px;
+				border:solid 1px blue;
+ 			}
+			#container{
+				position:center;
+				border:solid 1px #ccc;
+                margin-top: 10px;
+                width:800px;
+                height:440px;
+            }
+           #buttons > input {
+                padding: 10px;
+                display: block;
+                margin-top: 5px;
+            }
+            #buttons {
+                position: absolute;
+                top: 0px;
+                left: 5px;
+				padding: 1px;
+			}
+			
+			#myList {
+				margin: 1em;
+				float: left;
+			}
+
+			#myList UL {
+				padding: 0px;
+				margin: 0em 1em;
+			}
+
+			#myList LI {
+				width: 100px;
+				border: solid 1px #2AA7DE;
+				background: #6CC8EF;
+				padding: 5px 5px;
+				margin: 2px 0px;
+				list-style: none;
+			}
+			
+			
+            </style>
+        
+        <body>
+            <script>window.tableIndex = 0;
+                window.tablePositionList = [[], []];
+            </script>
+		   
+		   <center>
+           <h4>GNSMOOD</h4>
+           
+			<div id="toolbar">
+				
+		    	<table align="center" cellspacing="10">	
+				<tr>
+				<!-- <figure> -->
+			    <td align="center"> 
+				<img id="host" class="tool" width=35 height=32 title = "Host" src="host.png"><input type="hidden" id="ho" value=""> <figcaption> Host </figcaption>
+				</td>
+				<td align="center">
+				<img id="hub" class="tool" width=35 height=32 title = "Hub" src="hub.png"><input type="hidden" id="hu" value=""> <figcaption> Hub </figcaption>
+				</td>
+				<td align="center"> 
+				<img id="vpcs" class="tool" width=35 height=32 title = "Vpcs" src="vpcs.png"><input type="hidden" id="vpc" value=""> <figcaption> VPCS </figcaption>
+				<td align="center">
+				<img id="atm" class="tool" width=35 height=32 title = "Atm" src="atm.png"><input type="hidden" id="at" value=""> <figcaption> ATM </figcaption>
+				</td>
+				<td align="center">
+				<img id="switche" class="tool" width=35 height=32 title ="Switch" src="switche.png"><input type="hidden" id="sw" value=""> <figcaption> Switch </figcaption>
+				</td>
+				<td align="center">
+				<img id="cloud" class="tool" width=35 height=32 title = "Cloud" src="cloud.png"><input type="hidden" id="clo" value=""> <figcaption> Cloud </figcaption>
+				</td>
+				<td align="center">
+				<img id="frame_delay" class="tool" width=35 height=32 title = "Frame Delay" src="frame_delay.png"><input type="hidden" id="fram" value=""> <figcaption> Frame Delay </figcaption>
+				</td>
+				
+				<!-- </figure> -->
+				</tr>
+				</table>
+				
+                <!--<br>-->
+            </div>
+			</center>
+			<center>
+				<div id="container"></div>
+		 	</center>
+			<center>
+			<div id="toolbar2">
+				<img id="iniciar" class="tool2" width=75 height=72 src="iniciar.png"><input type="hidden" id="ini" value="">
+				<img id="parar" class="tool2" width=75 height=72 src="parar.png"><input type="hidden" id="par" value="">
+				<img id="pausar" class="tool2" width=75 height=72 src="pausar.png"><input type="hidden" id="pau" value="">
+			</div>
+			</center>
+            <!-- MY MENU -->
+             <!-- <menu id="myMenu" type="context" class="showcase"> -->
+                <!-- <menuitem label="decreption"onclick="window.open('http://google.com','_newtab');"></menuitem> -->
+                <!-- <menuitem label="contact person"></menuitem> -->
+                <!-- <menu id="html5menu1" type="context" class="showcase"> -->
+                    <!-- <menuitem label="ajay"onclick="window.open('http://google.com','_newtab');"></menuitem> -->
+                    <!-- <menuitem label="vijay"></menuitem> -->
+
+           
+			<!-- <ul id="myMenu" class="contextMenu"> -->
+			<!-- <li class="edit"><a href="#edit">Edit</a></li> -->
+			<!-- <li class="cut separator"><a href="#cut">Cut</a></li> -->
+			<!-- <li class="copy"><a href="#copy">Copy</a></li> -->
+			<!-- <li class="paste"><a href="#paste">Paste</a></li> -->
+			<!-- <li class="delete"><a href="#delete">Delete</a></li> -->
+			<!-- <li class="quit separator"><a href="#quit">Quit</a></li> -->
+			<!-- </ul> -->
+			
+           <!-- <div id="buttons">
+                <input type="button" id="clear" value="Clear">
+                <input type="button" id="submit"  value="Submit" >
+            </div>-->
+            <script>
+//                var $tools = $(".tool");
+                //global variable
+//                var imageId;$("#disableMenus").click( function() {
+                        
+//                imageId = document.getElementById('house2_hidden').value = "house2";
+//                imageId = document.getElementById('house_hidden').value = "house";
+//                imageId = document.getElementById('house6_hidden').value = "house6";
+             //   var global_image;
+                // get a reference to the house icon in the toolbar
+                // hide the icon until its image has loaded
+                var $host = $("#host");
+                $host.hide();
+
+                var $hub = $("#hub");
+                $hub.hide();
+
+                var $vpcs = $("#vpcs");
+                $vpcs.hide();
+                
+                
+                var $switche = $("#switche");
+                $switche.hide();
+
+                var $atm = $("#atm");
+                $atm.hide();
+
+                var $cloud = $("#cloud");
+                $cloud.hide();
+                
+                var $frame_delay = $("#frame_delay");
+                $frame_delay.hide();
+                
+
+                // get the offset position of the kinetic container
+                var $stageContainer = $("#container");
+                var stageOffset = $stageContainer.offset();
+                var offsetX = stageOffset.left;
+                var offsetY = stageOffset.top;
+                // create the Kinetic.Stage and layer
+                var stage = new Kinetic.Stage({
+                    container: 'container',
+                    width: 800,
+                    height: 440
+                });
+                var layer = new Kinetic.Layer();
+                stage.add(layer);
+                
+                
+                
+                // start loading the image used in the draggable toolbar element
+                // this image will be used in a new Kinetic.Image
+                var image1 = new Image();
+                image1.onload = function () {
+                    $host.show();
+                };
+                var image2 = new Image();  
+                image2.onload = function () {
+                    $hub.show();
+                };
+                var image3 = new Image();
+                image3.onload = function () {
+                    $vpcs.show();
+                };
+                var image4 = new Image();
+                image4.onload = function () {
+                    $switche.show();
+                };
+
+                var image5 = new Image();
+                image5.onload = function () {
+                    $atm.show();
+                };
+                var image6 = new Image();
+                image6.onload = function () {
+                    $cloud.show();
+                };
+                var image7 = new Image();
+                image7.onload = function () {
+                    $frame_delay.show();
+                };
+                
+                image1.src = "host.png";
+                image2.src = "hub.png";
+                image3.src = "vpcs.png";
+                image4.src = "switche.png";
+                image5.src = "atm.png";
+                image6.src = "cloud.png";
+                image7.src = "frame_delay.png";
+                
+                // make the toolbar image draggable
+                $("#host").draggable({
+                    helper: 'clone',
+                    obstacle: "#host",
+                    preventCollision: true,
+                    containment: 'container'
+                });
+                $("#hub").draggable({
+                    helper: 'clone',
+                    obstacle: "#hub",
+                    preventCollision: true,
+                    containment: 'container'
+                });
+                $("#vpcs").draggable({
+                    helper: 'clone',
+                    obstacle: "#vpcs",
+                    preventCollision: true,
+                    containment: 'container'
+                });
+                $("#switche").draggable({
+                    helper: 'clone',
+                    obstacle: "#switche",
+                    preventCollision: true,
+                    containment: 'container'
+                });
+
+                 $("#atm").draggable({
+                    helper: 'clone',
+                    obstacle: "#atm",
+                    preventCollision: true,
+                    containment: 'container'
+                });
+                 $("#cloud").draggable({
+                    helper: 'clone',
+                    obstacle: "#cloud",
+                    preventCollision: true,
+                    containment: 'container'
+                });
+                $("#frame_delay").draggable({
+                    helper: 'clone',
+                    obstacle: "#frame_delay",
+                    preventCollision: true,
+                    containment: 'container'
+                });
+                
+                
+                // set the data payload
+                $host.data("url", "host'.png"); // key-value pair
+                $host.data("width", "30"); // key-value pair
+                $host.data("height", "30"); // key-value pair
+                $host.data("image", image1); // key-value pair
+
+                $hub.data("url", "hub.png"); // key-value pair
+                $hub.data("width", "30"); // key-value pair
+                $hub.data("height", "30"); // key-value pair
+                $hub.data("image", image2); // key-value pair
+
+                $vpcs.data("url", "vpcs.png"); // key-value pair
+                $vpcs.data("width", "30"); // key-value pair
+                $vpcs.data("height", "30"); // key-value pair
+                $vpcs.data("image", image3); // key-value pair
+                
+                $switche.data("url", "switche.png"); // key-value pair
+                $switche.data("width", "30"); // key-value pair
+                $switche.data("height", "30"); // k: ' + $(el).attr('id') + '\n\n' +
+                $switche.data("image", image4); // key-value pair
+                                
+                $atm.data("url", "atm.png"); // key-value pair
+                $atm.data("width", "30"); // key-value pair
+                $atm.data("height", "30"); // key-value pair
+                $atm.data("image", image5); // key-value pair
+                
+                $cloud.data("url", "cloud.png"); // key-value pair
+                $cloud.data("width", "30"); // key-value pair
+                $cloud.data("height", "30"); // key-value pair
+                $cloud.data("image", image6); // key-value pair
+                
+                $frame_delay.data("url", "frame_delay.png"); // key-value pair
+                $frame_delay.data("width", "30"); // key-value pair
+                $frame_delay.data("height", "30"); // key-value pair
+                $frame_delay.data("image", image7); // key-value pair
+                
+                // make the Kinetic Container a dropzone
+                $stageContainer.droppable({
+                    tolerance: 'fit',
+                    drop: dragDrop
+                });
+
+                // handle a drop into the Kinetic container
+				function dragDrop(e, ui) {
+					var x = parseInt(ui.offset.left - offsetX);
+					var y = parseInt(ui.offset.top - offsetY);
+	
+
+                    // Below line gives you the id of the image that is dragged.
+                  //  var draggedElementID = ui.draggable.attr('id');
+
+
+
+                    console.log(x);   // Disable menus
+					console.log(y);
+                    // get the drop payload (here the payload is the image)
+                    var element = ui.draggable;
+                    var data = element.data("url");
+                    var theImage = element.data("image");
+                    // create a new Kinetic.Image at the drop point
+                    // be sure to adjust for any border width (here border==1)
+                    var image = new Kinetic.Image({
+                        name: data,
+                        x: x, 
+                        y: y,
+                        image: theImage,
+                        draggable: true
+                    });
+				
+                  
+
+                   // global_image = image;
+    //
+                    layer.add(image);
+                    layer.draw();
+		
+
+                   
+
+                    window.tablePositionList[tableIndex] = [x, y];
+                    window.tableIndex++;
+				
+				
+                
+                }
+				
+					
+					
+                
+                </script>
+				<script type="text/javascript">
+				$(function() {
+					var x = parseInt(ui.offset.left - offsetX);
+					var y = parseInt(ui.offset.top - offsetY);
+					//var host=document.getElementById("host");
+					
+					$.contextMenu({
+						selector: '.host', 
+						callback: function(key, options) {
+						var m = "clicked: " + key;
+						window.console && console.log(m) || alert(m); 
+						},
+						items: {
+							"edit": {name: "Edit", icon: "edit"},
+							"cut": {name: "Cut", icon: "cut"},
+							copy: {name: "Copy", icon: "copy"},
+							"paste": {name: "Paste", icon: "paste"},
+							"delete": {name: "Delete", icon: "delete"},
+							"sep1": "---------",
+							"quit": {name: "Quit", icon: function(){
+								return 'context-menu-icon context-menu-icon-quit';
+							}}
+						}
+					});
+
+					$('.host').on('click', function(e){
+					console.log('clicked', this);
+					})    
+				});
+				
+				
+				</script>
+            
+        </body>
+
+    </html>
