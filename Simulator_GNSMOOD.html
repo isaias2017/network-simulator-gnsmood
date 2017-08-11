@@ -14,7 +14,9 @@ http://labs.abeautifulsite.net/archived/jquery-contextMenu/demo/
         <script src="kinetic-v4.7.2.min.js"></script>
 		<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.0.1/jquery.contextMenu.min.js"></script>
-       
+        <!--menu -->	
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    	<link rel="stylesheet" href="contextMenu.min.css">
         
         </head>
 		<style>
@@ -361,47 +363,38 @@ http://labs.abeautifulsite.net/archived/jquery-contextMenu/demo/
                     window.tablePositionList[tableIndex] = [x, y];
                     window.tableIndex++;
 				
-				
                 
                 }
 				
-					
+		var menu1 = [
+				[
+			     	   {
+						text: "<i class='fa fa-cut site-cm-icon'></i>Recortar",
+						action: function () {
+						console.log("Recortar");
+						}
+					},
+					{
+						text: "<i class='fa fa-copy site-cm-icon'></i>Copiar",
+						action: function () {
+						console.log("Copiar");
+						}
+				
+					},
+					{
+						text: "<i class='fa fa-paste site-cm-icon'></i>Colar",
+						action: function () {
+						console.log("Colar");
+						}
+					}
+				]
+			     ];
+	//function called, is here!! i don't know!!!!				
+				$('stage?image?').contextMenu(menu1); -->					
 					
                 
-                </script>
-				<script type="text/javascript">
-				$(function() {
-					var x = parseInt(ui.offset.left - offsetX);
-					var y = parseInt(ui.offset.top - offsetY);
-					//var host=document.getElementById("host");
-					
-					$.contextMenu({
-						selector: '.host', 
-						callback: function(key, options) {
-						var m = "clicked: " + key;
-						window.console && console.log(m) || alert(m); 
-						},
-						items: {
-							"edit": {name: "Edit", icon: "edit"},
-							"cut": {name: "Cut", icon: "cut"},
-							copy: {name: "Copy", icon: "copy"},
-							"paste": {name: "Paste", icon: "paste"},
-							"delete": {name: "Delete", icon: "delete"},
-							"sep1": "---------",
-							"quit": {name: "Quit", icon: function(){
-								return 'context-menu-icon context-menu-icon-quit';
-							}}
-						}
-					});
-
-					$('.host').on('click', function(e){
-					console.log('clicked', this);
-					})    
-				});
-				
-				
-				</script>
-            
-        </body>
+      		</script>
+     
+	</body>
 
     </html>
